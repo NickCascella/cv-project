@@ -1,13 +1,17 @@
 import "./App.css";
 import { Component } from "react/cjs/react.production.min";
-import { GeneralInfo } from "./components/general_info";
-import { EducationalInfo } from "./components/educational_experience";
+import { GeneralInfo, GeneralInfoDisplay } from "./components/general_info";
+import {
+  EducationalInfo,
+  EducationalInfoDisplay,
+} from "./components/educational_experience";
 
 class App extends Component {
   constructor() {
     super();
 
     this.state = {
+      globalEdit: "",
       general_info: {
         first_name: "First Name",
         last_name: "Last Name",
@@ -23,69 +27,86 @@ class App extends Component {
         further_details: "Further descriptions and acheivements",
       },
       educational_experience: [],
+      previousWorkInfo: {
+        companyName: "",
+        position: "",
+        tasks: [],
+        startDate: "",
+        endDate: "",
+      },
+      workExperience: [],
     };
-    this.changeGeneralInfo = this.changeGeneralInfo.bind(this);
-    this.updateEducation = this.updateEducation.bind(this);
-    this.addEducation = this.updateEducation.bind(this);
+    this.parentSetStateGeneral = this.parentSetStateGeneral.bind(this);
+    this.parentSetStateEducational = this.parentSetStateEducational.bind(this);
+    this.addEducation = this.addEducation.bind(this);
   }
-  changeGeneralInfo = (key, e) => {
-    let target = e.target;
-    let gInfo = this.state.general_info;
-    let arrayGeneral = [];
-    arrayGeneral.push(
-      gInfo.first_name,
-      gInfo.last_name,
-      gInfo.email,
-      gInfo.phone_number
-    );
-    for (let i = 0; i < arrayGeneral.length; i++) {
-      if (e.key === "Enter") {
-        let newGeneralInfo = { ...gInfo };
-        newGeneralInfo[key] = target.value;
-        this.setState({
-          general_info: newGeneralInfo,
-        });
-        e.target.style.border = "none";
-      }
-    }
+
+  parentSetStateGeneral = (set) => {
+    this.setState({
+      general_info: set,
+    });
   };
 
-  updateEducation = (key, e) => {
-    let target = e.target;
-    let eInfo = this.state.educational_info;
-    for (let i = 0; i < 6; i++) {
-      if (e.key === "Enter") {
-        let newEducationalInfo = { ...eInfo };
-        newEducationalInfo[key] = target.value;
-        this.setState({
-          educational_info: newEducationalInfo,
-        });
-        e.target.style.border = "none";
-      }
-    }
+  parentSetStateEducational = (set) => {
+    this.setState({
+      educational_info: set,
+    });
   };
 
-  addEducation = () => {
+  addEducation = (e) => {
     let educationObjCopy = { ...this.state.educational_info };
-    let newEducationEntries = [];
+    this.setState({
+      educational_experience:
+        this.state.educational_experience.concat(educationObjCopy),
+      educational_info: {
+        university: "University",
+        city: "City",
+        from: "YYYY",
+        to: "YYYY",
+        degree: "degree or stream",
+        further_details: "Further descriptions and acheivements",
+      },
+    });
+    document.getElementById("university_entry").value = "";
+    document.getElementById("city_entry").value = "";
+    document.getElementById("start_date_entry").value = "";
+    document.getElementById("end_date_entry").value = "";
+    document.getElementById("degree_entry").value = "";
+    document.getElementById("details_entry").value = "";
+    e.preventDefault();
   };
 
   render() {
-    const { general_info, educational_info } = this.state;
+    const {
+      general_info,
+      educational_info,
+      educational_experience,
+      globalEdit,
+    } = this.state;
     return (
       <div>
-        <header>
-          <p>This is your CV</p>
-        </header>
-        <GeneralInfo
-          general_info={general_info}
-          changeInfo={this.changeGeneralInfo}
-        />
-        <EducationalInfo
-          addEducation={this.addEducation}
-          updateEducation={this.updateEducation}
-          educational_info={educational_info}
-        />
+        <header></header>
+        <body>
+          <div id="inputData">
+            <GeneralInfo
+              general_info={general_info}
+              parentSetState={this.parentSetStateGeneral}
+            />
+            <EducationalInfo
+              addEducation={this.addEducation}
+              parentSetStateEducational={this.parentSetStateEducational}
+              educational_info={educational_info}
+              educational_experience={educational_experience}
+            />
+          </div>
+          <div id="outputData">
+            <GeneralInfoDisplay general_info={general_info} />
+            <EducationalInfoDisplay
+              educational_experience={educational_experience}
+              globalEdit={globalEdit}
+            />
+          </div>
+        </body>
       </div>
     );
   }

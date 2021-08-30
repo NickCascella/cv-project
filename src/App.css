@@ -1,38 +1,110 @@
-.App {
-  text-align: center;
+html {
+  display: flex;
+  justify-content: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+  width: 800px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+input {
+  font-size: 15px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+#inputData {
+  height: 800px;
+  width: 800px;
+  background-color: rgb(50, 142, 248);
+  padding: 10px;
+}
+
+.inputDataGeneral {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 800px;
+  background-color: rgb(69, 123, 204);
+  padding-bottom: 40px;
+  border: 1px solid black;
+}
+
+.containerFLName {
+  display: flex;
+  justify-content: space-around;
+  width: 800px;
+}
+
+.containerEmailTel {
+  display: flex;
+  justify-content: space-around;
+  width: 800px;
+  padding-top: 30px;
+}
+
+.generalInfoDisplay {
+  border: 1px solid black;
+  width: 800px;
+}
+
+.inputDataEducational {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 800px;
+  background-color: rgb(69, 123, 204);
+  margin-top: 40px;
+  padding-bottom: 40px;
+  border: 1px solid black;
+}
+
+.educationalInfoDisplay {
+  border: 1px solid black;
+}
+
+.containerUniCity {
+  display: flex;
+  justify-content: space-around;
+  width: 800px;
+}
+
+.containerYearsDegree {
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-around;
+  width: 800px;
+}
+
+.year_format {
+  display: flex;
+}
+
+.year_from_format {
+  padding-right: 5px;
+}
+
+.additionalEducationInfo {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+textarea {
+  width: 300px;
+  height: 50px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#addEducation {
+  margin-left: 350px;
+}
+
+::placeholder {
+  color: black;
+}
+
+.test {
+  border: 0;
 }

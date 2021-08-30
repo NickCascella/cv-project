@@ -1,46 +1,100 @@
 import React from "react";
 
 const GeneralInfo = (props) => {
-  const { general_info, changeInfo } = props;
+  const { general_info, parentSetState } = props;
 
   return (
-    <div>
-      <div>
-        <input
-          type="text"
-          onKeyDown={(e) => changeInfo("first_name", e)}
-          placeholder={general_info.first_name}
-        ></input>
-      </div>
-      <div>
-        <input
-          type="text"
-          onKeyDown={(e) => changeInfo("last_name", e)}
-          placeholder={general_info.last_name}
-        ></input>
-      </div>
-      <div>
-        <input
-          type="email"
-          onKeyDown={(e) => changeInfo("email", e)}
-          placeholder={general_info.email}
-        ></input>
-      </div>
-      <div>
-        <input
-          type="tel"
-          onKeyDown={(e) => changeInfo("phone_number", e)}
-          placeholder={general_info.first_name}
-        ></input>
-      </div>
-      <div>
-        <li>{general_info.first_name}</li>
-        <li>{general_info.last_name}</li>
-        <li>{general_info.email}</li>
-        <li>{general_info.phone_number}</li>
-      </div>
+    <div className="inputDataGeneral">
+      <h1>
+        <u>General Information</u>
+      </h1>
+      <form>
+        <div className="containerFLName">
+          <div>
+            <input
+              type="text"
+              onChange={(e) =>
+                changeGeneralInfoDisplay(
+                  "first_name",
+                  e,
+                  general_info,
+                  parentSetState
+                )
+              }
+              placeholder="First Name"
+              required
+            ></input>
+          </div>
+          <div>
+            <input
+              type="text"
+              onChange={(e) =>
+                changeGeneralInfoDisplay(
+                  "last_name",
+                  e,
+                  general_info,
+                  parentSetState
+                )
+              }
+              placeholder="Last Name"
+              required
+            ></input>
+          </div>
+        </div>
+        <div className="containerEmailTel">
+          <div>
+            <input
+              type="email"
+              onChange={(e) =>
+                changeGeneralInfoDisplay(
+                  "email",
+                  e,
+                  general_info,
+                  parentSetState
+                )
+              }
+              placeholder="example@gmail.com"
+              required
+            ></input>
+          </div>
+          <div>
+            <input
+              type="tel"
+              onChange={(e) =>
+                changeGeneralInfoDisplay(
+                  "phone_number",
+                  e,
+                  general_info,
+                  parentSetState
+                )
+              }
+              placeholder="XXX-XXX-XXXX"
+              required
+            ></input>
+          </div>
+        </div>
+      </form>
     </div>
   );
 };
 
-export { GeneralInfo };
+const GeneralInfoDisplay = (props) => {
+  const { general_info } = props;
+  return (
+    <div className="generalInfoDisplay">
+      <div>{general_info.first_name}</div>
+      <div>{general_info.last_name}</div>
+      <div>{general_info.email}</div>
+      <div>{general_info.phone_number}</div>
+    </div>
+  );
+};
+
+const changeGeneralInfoDisplay = (key, e, general_info, parentSetState) => {
+  let target = e.target;
+  let newGeneralInfo = { ...general_info };
+  newGeneralInfo[key] = target.value;
+  parentSetState(newGeneralInfo);
+};
+
+export { GeneralInfo, GeneralInfoDisplay, changeGeneralInfoDisplay };
