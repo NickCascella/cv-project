@@ -16,7 +16,7 @@ class App extends Component {
         first_name: "First Name",
         last_name: "Last Name",
         email: "Email",
-        phone_number: "xxx-xxx-xxxx",
+        phone_number: "Phone Number",
       },
       educational_info: {
         university: "University",
@@ -101,6 +101,11 @@ class App extends Component {
           </div>
           <div id="outputData">
             <GeneralInfoDisplay general_info={general_info} />
+            <div className="educationTitle">
+              <b>
+                <u>Education</u>
+              </b>
+            </div>
             <EducationalInfoDisplay
               educational_experience={educational_experience}
               globalEdit={globalEdit}

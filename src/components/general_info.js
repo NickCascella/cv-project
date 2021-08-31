@@ -68,7 +68,7 @@ const GeneralInfo = (props) => {
                   parentSetState
                 )
               }
-              placeholder="XXX-XXX-XXXX"
+              placeholder="Phone Number"
               required
             ></input>
           </div>
@@ -82,10 +82,30 @@ const GeneralInfoDisplay = (props) => {
   const { general_info } = props;
   return (
     <div className="generalInfoDisplay">
-      <div>{general_info.first_name}</div>
-      <div>{general_info.last_name}</div>
-      <div>{general_info.email}</div>
-      <div>{general_info.phone_number}</div>
+      <input
+        type="text"
+        placeholder="First Name"
+        className="inputDisplayedGeneral"
+        value={general_info.first_name}
+      ></input>
+      <input
+        type="text"
+        placeholder="Last Name"
+        className="inputDisplayedGeneral"
+        value={general_info.last_name}
+      ></input>
+      <input
+        type="text"
+        placeholder="example@gmail.com"
+        className="inputDisplayedGeneral"
+        value={general_info.email}
+      ></input>
+      <input
+        type="text"
+        placeholder="Phone Number"
+        className="inputDisplayedGeneral"
+        value={general_info.phone_number}
+      ></input>
     </div>
   );
 };

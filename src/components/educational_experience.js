@@ -7,6 +7,7 @@ const randomId = () => {
 };
 
 const deleteItem = (id) => {
+  // document.getElementById("texts").textContent = id.university;
   document.getElementById(id).remove();
 };
 
@@ -140,45 +141,45 @@ const EducationalInfoDisplay = (props) => {
         return (
           <div id={specialId} className="educationalInfoDisplay">
             <div className="cityAndUniversityFormat">
-              <div>
+              <div className="universityDiv">
                 <label>
                   <b>University:</b>
                 </label>
                 <input
                   type="text"
-                  className="input"
+                  className="inputDisplayed"
                   placeholder={parts.university}
                 ></input>
               </div>
-              <div>
-                <label className="test">
+              <div className="cityDiv">
+                <label>
                   <b>City:</b>
                 </label>
                 <input
                   type="text"
-                  className="input"
+                  className="inputDisplayed"
                   placeholder={parts.city}
                 ></input>
               </div>
             </div>
             <div className="cityAndUniversityFormat">
               <div className="year_format">
-                <div className="year_from_format">
+                <label className="year_from_format">
                   <b>From:</b>
-                </div>
+                </label>
                 <input
                   type="number"
-                  className="input"
+                  className="inputDisplayed"
                   placeholder={parts.from}
                 ></input>
               </div>
               <div className="year_format">
-                <div className="year_from_format">
+                <label className="year_from_format">
                   <b>To:</b>
-                </div>
+                </label>
                 <input
                   type="number"
-                  className="input"
+                  className="inputDisplayed"
                   placeholder={parts.to}
                 ></input>
               </div>
@@ -189,7 +190,7 @@ const EducationalInfoDisplay = (props) => {
               </label>
               <input
                 type="text"
-                className="test"
+                className="inputDisplayed"
                 placeholder={parts.degree}
                 maxLength="10"
               ></input>
@@ -199,11 +200,13 @@ const EducationalInfoDisplay = (props) => {
                 <b>Achievements and accomplishments</b>
               </label>
               <textarea
+                id="texts"
                 className="textareaTwo"
                 placeholder={parts.further_details}
               ></textarea>
             </div>
             <button
+              className="delete"
               onClick={() => {
                 deleteItem(specialId);
               }}
