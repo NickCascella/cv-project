@@ -118,6 +118,7 @@ const EducationalInfo = (props) => {
                 parentSetStateEducational
               )
             }
+            className="textareaOne"
             placeholder={"Further details and achievements"}
           ></textarea>
         </div>
@@ -138,23 +139,70 @@ const EducationalInfoDisplay = (props) => {
         let specialId = randomId();
         return (
           <div id={specialId} className="educationalInfoDisplay">
-            <input
-              type="text"
-              className="test"
-              placeholder={parts.university}
-            ></input>
-            <div contentEditable="true">{parts.university}</div>
-            <div contentEditable="true">{parts.city}</div>
-            <div className="year_format">
-              <div className="year_from_format">From:</div>
-              <div contentEditable="true">{parts.from}</div>
+            <div className="cityAndUniversityFormat">
+              <div>
+                <label>
+                  <b>University:</b>
+                </label>
+                <input
+                  type="text"
+                  className="input"
+                  placeholder={parts.university}
+                ></input>
+              </div>
+              <div>
+                <label className="test">
+                  <b>City:</b>
+                </label>
+                <input
+                  type="text"
+                  className="input"
+                  placeholder={parts.city}
+                ></input>
+              </div>
             </div>
-            <div className="year_format">
-              <div className="year_from_format">To:</div>
-              <div contentEditable="true">{parts.to}</div>
+            <div className="cityAndUniversityFormat">
+              <div className="year_format">
+                <div className="year_from_format">
+                  <b>From:</b>
+                </div>
+                <input
+                  type="number"
+                  className="input"
+                  placeholder={parts.from}
+                ></input>
+              </div>
+              <div className="year_format">
+                <div className="year_from_format">
+                  <b>To:</b>
+                </div>
+                <input
+                  type="number"
+                  className="input"
+                  placeholder={parts.to}
+                ></input>
+              </div>
             </div>
-            <div contentEditable="true">{parts.degree}</div>
-            <div contentEditable="true">{parts.further_details}</div>
+            <div className="degree">
+              <label>
+                <b>Degree:</b>
+              </label>
+              <input
+                type="text"
+                className="test"
+                placeholder={parts.degree}
+                maxLength="10"
+              ></input>
+            </div>
+            <div className="additionalEducationInfoTwo">
+              <label>
+                <b>Achievements and accomplishments</b>
+              </label>
+              <textarea
+                className="textareaTwo"
+                placeholder={parts.further_details}
+              ></textarea>
+            </div>
             <button
               onClick={() => {
                 deleteItem(specialId);
