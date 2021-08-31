@@ -123,7 +123,7 @@ const EducationalInfo = (props) => {
             placeholder={"Further details and achievements"}
           ></textarea>
         </div>
-        <button id="addEducation" type="submit">
+        <button id="addEducation" className="addBtn" type="submit">
           Add Education +
         </button>
       </form>
@@ -220,16 +220,11 @@ const EducationalInfoDisplay = (props) => {
   );
 };
 
-let edit = (e, obj) => {
-  console.log(e.target.value);
-  e.target.value = "";
-};
-
 let updateEducation = (key, e, oldState, setState) => {
-  console.log(e.target);
   let target = e.target;
   let newEducationalInfo = { ...oldState };
   newEducationalInfo[key] = target.value;
+  console.log(newEducationalInfo);
   setState(newEducationalInfo);
 };
 

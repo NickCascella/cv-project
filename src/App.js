@@ -6,6 +6,8 @@ import {
   EducationalInfoDisplay,
 } from "./components/educational_experience";
 
+import { WorkInfo, WorkInfoDisplay } from "./components/practical_experience";
+
 class App extends Component {
   constructor() {
     super();
@@ -28,17 +30,19 @@ class App extends Component {
       },
       educational_experience: [],
       previousWorkInfo: {
-        companyName: "",
-        position: "",
-        tasks: [],
-        startDate: "",
-        endDate: "",
+        companyName: "Company",
+        position: "Title",
+        startDate: "YYYY",
+        endDate: "YYYY",
+        tasks: "Please enter roles and responsibilities",
       },
       workExperience: [],
     };
     this.parentSetStateGeneral = this.parentSetStateGeneral.bind(this);
     this.parentSetStateEducational = this.parentSetStateEducational.bind(this);
+    this.parentSetStateWork = this.parentSetStateWork.bind(this);
     this.addEducation = this.addEducation.bind(this);
+    this.addWork = this.addWork.bind(this);
   }
 
   parentSetStateGeneral = (set) => {
@@ -53,8 +57,15 @@ class App extends Component {
     });
   };
 
+  parentSetStateWork = (set) => {
+    this.setState({
+      previousWorkinfo: set,
+    });
+  };
+
   addEducation = (e) => {
     let educationObjCopy = { ...this.state.educational_info };
+    console.log(educationObjCopy);
     this.setState({
       educational_experience:
         this.state.educational_experience.concat(educationObjCopy),
@@ -76,12 +87,37 @@ class App extends Component {
     e.preventDefault();
   };
 
+  addWork = (e) => {
+    let workObjCopy = { ...this.state.previousWorkInfo };
+    console.log(this.state.previousWorkInfo);
+    this.setState({
+      workExperience: this.state.workExperience.concat(workObjCopy),
+      previousWorkinfo: {
+        companyName: "Company",
+        position: "Title",
+        startDate: "YYYY",
+        endDate: "YYYY",
+        tasks: "Roles and responsibilities",
+      },
+    });
+    console.log(this.state.workExperience);
+    document.getElementById("companyEntry").value = "";
+    document.getElementById("positionEntry").value = "";
+    document.getElementById("startDateWork").value = "";
+    document.getElementById("endDateWork").value = "";
+    document.getElementById("degree_entry").value = "";
+    document.getElementById("workDetailsEntry").value = "";
+    e.preventDefault();
+  };
+
   render() {
     const {
       general_info,
       educational_info,
       educational_experience,
       globalEdit,
+      previousWorkInfo,
+      workExperience,
     } = this.state;
     return (
       <div>
@@ -96,7 +132,11 @@ class App extends Component {
               addEducation={this.addEducation}
               parentSetStateEducational={this.parentSetStateEducational}
               educational_info={educational_info}
-              educational_experience={educational_experience}
+            />
+            <WorkInfo
+              addWork={this.addWork}
+              parentSetStateWork={this.parentSetStateWork}
+              previousWorkInfo={previousWorkInfo}
             />
           </div>
           <div id="outputData">
@@ -108,6 +148,15 @@ class App extends Component {
             </div>
             <EducationalInfoDisplay
               educational_experience={educational_experience}
+              globalEdit={globalEdit}
+            />
+            <div className="educationTitle">
+              <b>
+                <u>Work Expereince</u>
+              </b>
+            </div>
+            <WorkInfoDisplay
+              workExperience={workExperience}
               globalEdit={globalEdit}
             />
           </div>
