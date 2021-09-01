@@ -51,9 +51,14 @@ const WorkInfo = (props) => {
     };
     onSubmit(formData);
     e.preventDefault();
+    const value = "";
+    setCompanyName(value);
+    setPosition(value);
+    setStartDate(value);
+    setEndDate(value);
+    setWorkDetails(value);
   };
 
-  console.log(companyName, position);
   return (
     <div className="inputDataWork">
       <h1>
@@ -88,6 +93,7 @@ const WorkInfo = (props) => {
               min="2000"
               max="2021"
               onChange={handleStartDateChange}
+              value={startDate}
               required
               placeholder={"Start Y"}
             ></input>
@@ -99,6 +105,7 @@ const WorkInfo = (props) => {
               onChange={handleEndDateChange}
               required
               placeholder={"End Y"}
+              value={endDate}
               min="2000"
               max="2040"
             ></input>
@@ -108,6 +115,7 @@ const WorkInfo = (props) => {
           <textarea
             id="workDetailsEntry"
             onChange={handleTasksChange}
+            value={tasks}
             className="textareaOne"
             placeholder={"Please enter roles and responsibilities"}
           ></textarea>
