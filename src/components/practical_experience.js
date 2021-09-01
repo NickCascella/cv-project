@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./components.css";
 
 const randomId = () => {
@@ -11,27 +11,62 @@ const deleteItem = (id) => {
 };
 
 const WorkInfo = (props) => {
-  const { addWork, previousWorkInfo, parentSetStateWork } = props;
+  const { addWork, previousWorkInfo, parentSetStateWork, onSubmit } = props;
 
+  const [companyName, setCompanyName] = useState("");
+  const [position, setPosition] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [tasks, setWorkDetails] = useState("");
+
+  const handleCompanyNameChange = (e) => {
+    const value = e.target.value;
+    setCompanyName(value);
+  };
+
+  const handlePositionChange = (e) => {
+    const value = e.target.value;
+    setPosition(value);
+  };
+  const handleStartDateChange = (e) => {
+    const value = e.target.value;
+    setStartDate(value);
+  };
+  const handleEndDateChange = (e) => {
+    const value = e.target.value;
+    setEndDate(value);
+  };
+  const handleTasksChange = (e) => {
+    const value = e.target.value;
+    setWorkDetails(value);
+  };
+
+  const handleSubmit = (e) => {
+    const formData = {
+      companyName: companyName,
+      position: position,
+      startDate: startDate,
+      endDate: endDate,
+      tasks: tasks,
+    };
+    onSubmit(formData);
+    e.preventDefault();
+  };
+
+  console.log(companyName, position);
   return (
     <div className="inputDataWork">
       <h1>
         <u>Previous Work Information</u>
       </h1>
-      <form onSubmit={addWork} id="educationalForm">
+      <form onSubmit={handleSubmit} id="educationalForm">
         <div className="containerUniCity">
           <div>
             <input
               id="companyEntry"
               type="text"
-              onChange={(e) =>
-                updateWorkExperience(
-                  "companyName",
-                  e,
-                  previousWorkInfo,
-                  parentSetStateWork
-                )
-              }
+              onChange={handleCompanyNameChange}
+              value={companyName}
               placeholder={"Please enter company"}
             ></input>
           </div>
@@ -39,14 +74,8 @@ const WorkInfo = (props) => {
             <input
               id="positionEntry"
               type="text"
-              onChange={(e) =>
-                updateWorkExperience(
-                  "position",
-                  e,
-                  previousWorkInfo,
-                  parentSetStateWork
-                )
-              }
+              onChange={handlePositionChange}
+              value={position}
               placeholder={"Please work title"}
             ></input>
           </div>
@@ -58,14 +87,7 @@ const WorkInfo = (props) => {
               type="number"
               min="2000"
               max="2021"
-              onChange={(e) =>
-                updateWorkExperience(
-                  "startDate",
-                  e,
-                  previousWorkInfo,
-                  parentSetStateWork
-                )
-              }
+              onChange={handleStartDateChange}
               required
               placeholder={"Start Y"}
             ></input>
@@ -74,14 +96,7 @@ const WorkInfo = (props) => {
             <input
               id="endDateWork"
               type="number"
-              onChange={(e) =>
-                updateWorkExperience(
-                  "endDate",
-                  e,
-                  previousWorkInfo,
-                  parentSetStateWork
-                )
-              }
+              onChange={handleEndDateChange}
               required
               placeholder={"End Y"}
               min="2000"
@@ -92,14 +107,7 @@ const WorkInfo = (props) => {
         <div className="additionalEducationInfo">
           <textarea
             id="workDetailsEntry"
-            onChange={(e) =>
-              updateWorkExperience(
-                "further_details",
-                e,
-                previousWorkInfo,
-                parentSetStateWork
-              )
-            }
+            onChange={handleTasksChange}
             className="textareaOne"
             placeholder={"Please enter roles and responsibilities"}
           ></textarea>

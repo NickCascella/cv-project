@@ -40,9 +40,9 @@ class App extends Component {
     };
     this.parentSetStateGeneral = this.parentSetStateGeneral.bind(this);
     this.parentSetStateEducational = this.parentSetStateEducational.bind(this);
-    this.parentSetStateWork = this.parentSetStateWork.bind(this);
+    // this.parentSetStateWork = this.parentSetStateWork.bind(this);
     this.addEducation = this.addEducation.bind(this);
-    this.addWork = this.addWork.bind(this);
+    // this.addWork = this.addWork.bind(this);
   }
 
   parentSetStateGeneral = (set) => {
@@ -57,11 +57,11 @@ class App extends Component {
     });
   };
 
-  parentSetStateWork = (set) => {
-    this.setState({
-      previousWorkinfo: set,
-    });
-  };
+  // parentSetStateWork = (set) => {
+  //   this.setState({
+  //     previousWorkinfo: set,
+  //   });
+  // };
 
   addEducation = (e) => {
     let educationObjCopy = { ...this.state.educational_info };
@@ -87,28 +87,28 @@ class App extends Component {
     e.preventDefault();
   };
 
-  addWork = (e) => {
-    let workObjCopy = { ...this.state.previousWorkInfo };
-    console.log(this.state.previousWorkInfo);
-    this.setState({
-      workExperience: this.state.workExperience.concat(workObjCopy),
-      previousWorkinfo: {
-        companyName: "Company",
-        position: "Title",
-        startDate: "YYYY",
-        endDate: "YYYY",
-        tasks: "Roles and responsibilities",
-      },
-    });
-    console.log(this.state.workExperience);
-    document.getElementById("companyEntry").value = "";
-    document.getElementById("positionEntry").value = "";
-    document.getElementById("startDateWork").value = "";
-    document.getElementById("endDateWork").value = "";
-    document.getElementById("degree_entry").value = "";
-    document.getElementById("workDetailsEntry").value = "";
-    e.preventDefault();
-  };
+  // addWork = (e) => {
+  //   let workObjCopy = { ...this.state.previousWorkInfo };
+  //   console.log(this.state.previousWorkInfo);
+  //   this.setState({
+  //     workExperience: this.state.workExperience.concat(workObjCopy),
+  //     previousWorkinfo: {
+  //       companyName: "Company",
+  //       position: "Title",
+  //       startDate: "YYYY",
+  //       endDate: "YYYY",
+  //       tasks: "Roles and responsibilities",
+  //     },
+  //   });
+  //   console.log(this.state.workExperience);
+  //   document.getElementById("companyEntry").value = "";
+  //   document.getElementById("positionEntry").value = "";
+  //   document.getElementById("startDateWork").value = "";
+  //   document.getElementById("endDateWork").value = "";
+  //   document.getElementById("degree_entry").value = "";
+  //   document.getElementById("workDetailsEntry").value = "";
+  //   e.preventDefault();
+  // };
 
   render() {
     const {
