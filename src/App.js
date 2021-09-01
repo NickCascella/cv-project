@@ -43,6 +43,7 @@ class App extends Component {
     // this.parentSetStateWork = this.parentSetStateWork.bind(this);
     this.addEducation = this.addEducation.bind(this);
     // this.addWork = this.addWork.bind(this);
+    this.handleWorkInfoSubmit = this.handleWorkInfoSubmit.bind(this);
   }
 
   parentSetStateGeneral = (set) => {
@@ -110,6 +111,13 @@ class App extends Component {
   //   e.preventDefault();
   // };
 
+  handleWorkInfoSubmit = (formData) => {
+    console.log(formData);
+    this.setState({
+      workExperience: this.state.workExperience.concat(formData),
+    });
+  };
+
   render() {
     const {
       general_info,
@@ -137,6 +145,7 @@ class App extends Component {
               addWork={this.addWork}
               parentSetStateWork={this.parentSetStateWork}
               previousWorkInfo={previousWorkInfo}
+              onSubmit={this.handleWorkInfoSubmit}
             />
           </div>
           <div id="outputData">
