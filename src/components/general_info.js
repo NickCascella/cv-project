@@ -1,7 +1,16 @@
 import React from "react";
 
 const GeneralInfo = (props) => {
-  const { general_info, parentSetState } = props;
+  const {
+    firstName,
+    lastName,
+    phoneNumber,
+    email,
+    setFirstName,
+    setLastName,
+    setPhoneNumber,
+    setEmail,
+  } = props;
 
   return (
     <div className="inputDataGeneral">
@@ -13,14 +22,7 @@ const GeneralInfo = (props) => {
           <div>
             <input
               type="text"
-              onChange={(e) =>
-                changeGeneralInfoDisplay(
-                  "first_name",
-                  e,
-                  general_info,
-                  parentSetState
-                )
-              }
+              onChange={(e) => setFirstName(e.target.value)}
               placeholder="First Name"
               required
             ></input>
@@ -28,14 +30,7 @@ const GeneralInfo = (props) => {
           <div>
             <input
               type="text"
-              onChange={(e) =>
-                changeGeneralInfoDisplay(
-                  "last_name",
-                  e,
-                  general_info,
-                  parentSetState
-                )
-              }
+              onChange={(e) => setLastName(e.target.value)}
               placeholder="Last Name"
               required
             ></input>
@@ -45,14 +40,7 @@ const GeneralInfo = (props) => {
           <div>
             <input
               type="email"
-              onChange={(e) =>
-                changeGeneralInfoDisplay(
-                  "email",
-                  e,
-                  general_info,
-                  parentSetState
-                )
-              }
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="example@gmail.com"
               required
             ></input>
@@ -60,14 +48,7 @@ const GeneralInfo = (props) => {
           <div>
             <input
               type="tel"
-              onChange={(e) =>
-                changeGeneralInfoDisplay(
-                  "phone_number",
-                  e,
-                  general_info,
-                  parentSetState
-                )
-              }
+              onChange={(e) => setPhoneNumber(e.target.value)}
               placeholder="Phone Number"
               required
             ></input>
@@ -79,32 +60,32 @@ const GeneralInfo = (props) => {
 };
 
 const GeneralInfoDisplay = (props) => {
-  const { general_info } = props;
+  const { firstName, lastName, phoneNumber, email } = props;
   return (
     <div className="generalInfoDisplay">
       <input
         type="text"
         placeholder="First Name"
         className="inputDisplayedGeneral"
-        value={general_info.first_name}
+        value={firstName}
       ></input>
       <input
         type="text"
         placeholder="Last Name"
         className="inputDisplayedGeneral"
-        value={general_info.last_name}
+        value={lastName}
       ></input>
       <input
         type="text"
         placeholder="example@gmail.com"
         className="inputDisplayedGeneral"
-        value={general_info.email}
+        value={email}
       ></input>
       <input
         type="text"
         placeholder="Phone Number"
         className="inputDisplayedGeneral"
-        value={general_info.phone_number}
+        value={phoneNumber}
       ></input>
     </div>
   );

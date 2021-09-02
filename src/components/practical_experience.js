@@ -11,7 +11,7 @@ const deleteItem = (id) => {
 };
 
 const WorkInfo = (props) => {
-  const { addWork, previousWorkInfo, parentSetStateWork, onSubmit } = props;
+  const { onSubmit } = props;
 
   const [companyName, setCompanyName] = useState("");
   const [position, setPosition] = useState("");
@@ -206,11 +206,11 @@ const WorkInfoDisplay = (props) => {
   );
 };
 
-let updateWorkExperience = (key, e, oldState, setState) => {
-  let target = e.target;
-  let newWorkInfo = { ...oldState };
-  newWorkInfo[key] = target.value;
-  setState(newWorkInfo);
-};
+// let updateWorkExperience = (key, e, oldState, setState) => {
+//   let target = e.target;
+//   let newWorkInfo = { ...oldState };
+//   newWorkInfo[key] = target.value;
+//   setState(newWorkInfo);
+// };
 
 export { WorkInfo, WorkInfoDisplay };

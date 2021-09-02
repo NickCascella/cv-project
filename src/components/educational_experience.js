@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./components.css";
 
 const randomId = () => {
@@ -7,50 +7,94 @@ const randomId = () => {
 };
 
 const deleteItem = (id) => {
-  // document.getElementById("texts").textContent = id.university;
   document.getElementById(id).remove();
 };
 
 const EducationalInfo = (props) => {
-  const { addEducation, educational_info, parentSetStateEducational } = props;
+  const { onSubmit } = props;
+
+  const [universityName, setUniversityName] = useState("");
+  const [cityName, setCityName] = useState("");
+  const [educationStart, setEducationStart] = useState("");
+  const [educationEnd, setEducationEnd] = useState("");
+  const [degree, setDegree] = useState("");
+  const [educationDetails, setEducationDetails] = useState("");
+
+  let handleUniversityNameChange = (e) => {
+    let value = e.target.value;
+    setUniversityName(value);
+  };
+
+  let handleCityNameChange = (e) => {
+    let value = e.target.value;
+    setCityName(value);
+  };
+
+  let handleEducationStartChange = (e) => {
+    let value = e.target.value;
+    setEducationStart(value);
+  };
+
+  let handleEducationEndChange = (e) => {
+    let value = e.target.value;
+    setEducationEnd(value);
+  };
+
+  let handleDegreeChange = (e) => {
+    let value = e.target.value;
+    setDegree(value);
+  };
+
+  let handleEducationDetailsChange = (e) => {
+    let value = e.target.value;
+    setEducationDetails(value);
+  };
+
+  let handleSubmit = (e) => {
+    const formData = {
+      universityName: universityName,
+      cityName: cityName,
+      educationStart: educationStart,
+      educationEnd: educationEnd,
+      degree: degree,
+      educationDetails: educationDetails,
+    };
+    onSubmit(formData);
+    e.preventDefault();
+    let value = "";
+    setUniversityName(value);
+    setCityName(value);
+    setEducationStart(value);
+    setEducationEnd(value);
+    setDegree(value);
+    setEducationDetails(value);
+  };
 
   return (
     <div className="inputDataEducational">
       <h1>
         <u>Educational Information</u>
       </h1>
-      <form onSubmit={addEducation} id="educationalForm">
+      <form onSubmit={handleSubmit} id="educationalForm">
         <div className="containerUniCity">
           <div>
             <input
               id="university_entry"
               type="text"
-              onChange={(e) =>
-                updateEducation(
-                  "university",
-                  e,
-                  educational_info,
-                  parentSetStateEducational
-                )
-              }
+              onChange={handleUniversityNameChange}
               required
               placeholder={"Please enter a university"}
+              value={universityName}
             ></input>
           </div>
           <div>
             <input
               id="city_entry"
               type="text"
-              onChange={(e) =>
-                updateEducation(
-                  "city",
-                  e,
-                  educational_info,
-                  parentSetStateEducational
-                )
-              }
+              onChange={handleCityNameChange}
               required
               placeholder={"Please enter a city"}
+              value={cityName}
             ></input>
           </div>
         </div>
@@ -61,66 +105,42 @@ const EducationalInfo = (props) => {
               type="number"
               min="2000"
               max="2021"
-              onChange={(e) =>
-                updateEducation(
-                  "from",
-                  e,
-                  educational_info,
-                  parentSetStateEducational
-                )
-              }
+              onChange={handleEducationStartChange}
               required
               placeholder={"Start Y"}
+              value={educationStart}
             ></input>
           </div>
           <div>
             <input
               id="end_date_entry"
               type="number"
-              onChange={(e) =>
-                updateEducation(
-                  "to",
-                  e,
-                  educational_info,
-                  parentSetStateEducational
-                )
-              }
+              onChange={handleEducationEndChange}
               required
               placeholder={"End Y"}
               min="2000"
               max="2040"
+              value={educationEnd}
             ></input>
           </div>
           <div>
             <input
               id="degree_entry"
               type="text"
-              onChange={(e) =>
-                updateEducation(
-                  "degree",
-                  e,
-                  educational_info,
-                  parentSetStateEducational
-                )
-              }
+              onChange={handleDegreeChange}
               placeholder={"Please enter a major"}
               required
+              value={degree}
             ></input>
           </div>
         </div>
         <div className="additionalEducationInfo">
           <textarea
             id="details_entry"
-            onChange={(e) =>
-              updateEducation(
-                "further_details",
-                e,
-                educational_info,
-                parentSetStateEducational
-              )
-            }
+            onChange={handleEducationDetailsChange}
             className="textareaOne"
             placeholder={"Further details and achievements"}
+            value={educationDetails}
           ></textarea>
         </div>
         <button id="addEducation" className="addBtn" type="submit">
@@ -132,8 +152,8 @@ const EducationalInfo = (props) => {
 };
 
 const EducationalInfoDisplay = (props) => {
-  const { educational_experience, globalEdit } = props;
-  let educationalExperienceDuplicate = [...educational_experience];
+  const { educationalExperience } = props;
+  let educationalExperienceDuplicate = [...educationalExperience];
   return (
     <div>
       {educationalExperienceDuplicate.map((parts) => {
@@ -148,7 +168,7 @@ const EducationalInfoDisplay = (props) => {
                 <input
                   type="text"
                   className="inputDisplayed"
-                  placeholder={parts.university}
+                  placeholder={parts.universityName}
                 ></input>
               </div>
               <div className="cityDiv">
@@ -158,7 +178,7 @@ const EducationalInfoDisplay = (props) => {
                 <input
                   type="text"
                   className="inputDisplayed"
-                  placeholder={parts.city}
+                  placeholder={parts.cityName}
                 ></input>
               </div>
             </div>
@@ -170,7 +190,7 @@ const EducationalInfoDisplay = (props) => {
                 <input
                   type="number"
                   className="inputDisplayed"
-                  placeholder={parts.from}
+                  placeholder={parts.educationStart}
                 ></input>
               </div>
               <div className="year_format">
@@ -180,7 +200,7 @@ const EducationalInfoDisplay = (props) => {
                 <input
                   type="number"
                   className="inputDisplayed"
-                  placeholder={parts.to}
+                  placeholder={parts.educationEnd}
                 ></input>
               </div>
             </div>
@@ -202,7 +222,7 @@ const EducationalInfoDisplay = (props) => {
               <textarea
                 id="texts"
                 className="textareaTwo"
-                placeholder={parts.further_details}
+                placeholder={parts.educationDetails}
               ></textarea>
             </div>
             <button
